@@ -1,5 +1,4 @@
 package com.widpaper.app
-
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
@@ -7,7 +6,6 @@ import android.content.Context
 import android.widget.RemoteViews
 
 open class BaseWidget(private val layout: Int) : AppWidgetProvider() {
-
     override fun onUpdate(
         context: Context,
         manager: AppWidgetManager,
