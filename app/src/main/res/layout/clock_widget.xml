@@ -1,29 +1,43 @@
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="16dp"
-    android:background="#0A1A3F">
+package com.widpaper.app
 
-    <TextClock
-        android:id="@+id/widget_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:format12Hour="hh:mm"
-        android:format24Hour="HH:mm"
-        android:textColor="#FFFFFF"
-        android:textSize="42sp" />
+import android.app.PendingIntent
+import android.appwidget.AppWidgetManager
+import android.appwidget.AppWidgetProvider
+import android.content.Context
+import android.widget.RemoteViews
 
-    <TextView
-        android:id="@+id/widget_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Widpaper"
-        android:textColor="#BFE6FF"
-        android:textSize="14sp" />
+open class BaseWidget : AppWidgetProvider() {
 
-</LinearLayout>
+    override fun onUpdate(
+        context: Context,
+        manager: AppWidgetManager,
+        ids: IntArray
+    ) {
+        for (id in ids) {
+            val views = RemoteViews(
+                context.packageName,
+                R.layout.widget_clock
+            )
+
+            val intent = context.packageManager
+                .getLaunchIntentForPackage(context.packageName)
+
+            intent?.let {
+                val pending = PendingIntent.getActivity(
+                    context,
+                    id,
+                    it,
+                    PendingIntent.FLAG_UPDATE_CURRENT or
+                        PendingIntent.FLAG_IMMUTABLE
+                )
+
+                views.setOnClickPendingIntent(R.id.root, pending)
+            }
+
+            manager.updateAppWidget(id, views)
+        }
+    }
+}
+
+class ClockWidget : BaseWidget()
