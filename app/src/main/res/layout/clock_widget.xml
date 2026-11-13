@@ -1,5 +1,4 @@
 
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root"
@@ -17,8 +16,7 @@
         android:format12Hour="hh:mm"
         android:format24Hour="HH:mm"
         android:textColor="#FFFFFF"
-        android:textSize="42sp"
-        android:fontFamily="sans" />
+        android:textSize="42sp" />
 
     <TextView
         android:id="@+id/widget_date"
@@ -26,7 +24,6 @@
         android:layout_height="wrap_content"
         android:text="Widpaper"
         android:textColor="#BFE6FF"
-        android:textSize="14sp"
-        android:layout_marginTop="5dp" />
+        android:textSize="14sp" />
 
 </LinearLayout>
